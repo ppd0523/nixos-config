@@ -37,12 +37,6 @@
       };
     };
 
-    starship = {
-      enable = true;
-      enableZshIntegration = true;
-      settings.add_newline = false;
-    };
-
     fzf = {
       enable = true;
       enableZshIntegration = true;

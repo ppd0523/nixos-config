@@ -12,6 +12,7 @@ in
     ./programs.nix
     ./lazyvim.nix
     ./fnm.nix
+    ./starship.nix
   ];
 
   home = {

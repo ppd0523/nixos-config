@@ -1,0 +1,101 @@
+# Linked to ~/.config/starship.toml by modules/home/starship.nix.
+# Edits apply on the next prompt without a Home Manager rebuild.
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+# Line 1: location and Git.
+# Line 2: toolchains; the conditional group drops the whole line when empty.
+# Line 3: input.
+format = """
+$username$hostname$directory$git_branch$git_status$git_state$cmd_duration
+($nix_shell\
+$python${custom.python_missing}\
+$nodejs${custom.nodejs_missing}\
+$rust${custom.rust_missing}\
+$c${custom.c_missing}\
+$cpp${custom.cpp_missing}
+)$jobs$character"""
+
+[directory]
+# Full path from ~, also inside Git repositories.
+truncation_length = 0
+truncate_to_repo = false
+
+# Line 2 modules drop the default "via " prefix.
+[cpp]
+disabled = false
+format = '[$symbol($version(-$name) )]($style)'
+
+[nix_shell]
+format = '[$symbol$state( \($name\))]($style) '
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[nodejs]
+format = '[$symbol($version )]($style)'
+
+[rust]
+format = '[$symbol($version )]($style)'
+
+[c]
+format = '[$symbol($version(-$name) )]($style)'
+
+# Starship has no fallback for an empty $version. Each *_missing module uses
+# its language module's detection rules (they only gate `command`, so do not
+# add `when`: it would show the module everywhere) and prints "?" when no
+# interpreter or compiler is on PATH, so the line reads e.g. "🐍 ?".
+[custom.python_missing]
+detect_extensions = ["py", "ipynb"]
+detect_files = ["requirements.txt", ".python-version", "pyproject.toml", "Pipfile", "tox.ini", "setup.py", "__init__.py"]
+command = "command -v python >/dev/null || command -v python3 >/dev/null || command -v python2 >/dev/null || echo '?'"
+shell = ["sh"]
+style = "yellow bold"
+format = '([$output]($style) )'
+
+[custom.nodejs_missing]
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+command = "command -v node >/dev/null || echo '?'"
+shell = ["sh"]
+style = "bold green"
+format = '([$output]($style) )'
+
+[custom.rust_missing]
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml"]
+command = "command -v rustc >/dev/null || echo '?'"
+shell = ["sh"]
+style = "bold red"
+format = '([$output]($style) )'
+
+[custom.c_missing]
+detect_extensions = ["c", "h"]
+command = "command -v cc >/dev/null || command -v gcc >/dev/null || command -v clang >/dev/null || echo '?'"
+shell = ["sh"]
+style = "149 bold"
+format = '([$output]($style) )'
+
+[custom.cpp_missing]
+detect_extensions = ["cpp", "cc", "cxx", "c++", "hpp", "hh", "hxx", "h++", "tcc"]
+command = "command -v c++ >/dev/null || command -v g++ >/dev/null || command -v clang++ >/dev/null || echo '?'"
+shell = ["sh"]
+style = "149 bold"
+format = '([$output]($style) )'
+
+# Show change counts instead of bare symbols, e.g. "+2 ~3 ?1".
+# Staged (index) is green; unstaged (worktree) is yellow/red.
+[git_status]
+format = '([$conflicted$staged$renamed$modified$deleted$untracked$stashed$ahead_behind]($style))'
+conflicted = '[=${count} ](bold red)'
+staged = '[+${count} ](green)'
+renamed = '[»${count} ](green)'
+modified = '[~${count} ](yellow)'
+deleted = '[✘${count} ](red)'
+untracked = '[?${count} ](bright-black)'
+stashed = '[\$${count} ](purple)'
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕⇡${ahead_count}⇣${behind_count} '
