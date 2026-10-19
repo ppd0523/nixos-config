@@ -4,6 +4,11 @@ This repository separates NixOS host configuration from a standalone Home
 Manager user profile. It targets NixOS-WSL and can apply the same user profile
 on native NixOS.
 
+The Home Manager configuration is exposed as `homeConfigurations.<username>`,
+where `<username>` is the `username` value set in `flake.nix`. Replace
+`<username>` in the commands below with that value; it must match the login
+user on the machine.
+
 ## First machine: create the configuration repository
 
 This directory is a template, not an existing personal repository. On the
@@ -27,8 +32,8 @@ $ sudo nixos-rebuild build \
 $ sudo nixos-rebuild switch \
     --option experimental-features "nix-command flakes" \
     --flake .#wsl
-$ nix run .#home-manager -- build --flake .#nixos
-$ nix run .#home-manager -- switch --flake .#nixos
+$ nix run .#home-manager -- build --flake .#<username>
+$ nix run .#home-manager -- switch --flake .#<username>
 $ exec zsh
 $ git commit -m "Bootstrap NixOS-WSL environment"
 $ git push -u origin main
@@ -60,8 +65,8 @@ $ sudo nixos-rebuild build \
 $ sudo nixos-rebuild switch \
     --option experimental-features "nix-command flakes" \
     --flake .#wsl
-$ nix run .#home-manager -- build --flake .#nixos
-$ nix run .#home-manager -- switch --flake .#nixos
+$ nix run .#home-manager -- build --flake .#<username>
+$ nix run .#home-manager -- switch --flake .#<username>
 $ exec zsh
 $ exit
 ```
@@ -97,9 +102,9 @@ loaded that project's development shell.
 $ nix flake update
 $ nix fmt
 $ sudo nixos-rebuild build --flake .#wsl
-$ home-manager build --flake .#nixos
+$ home-manager build --flake .#<username>
 $ sudo nixos-rebuild switch --flake .#wsl
-$ home-manager switch --flake .#nixos
+$ home-manager switch --flake .#<username>
 $ git add flake.lock
 $ git commit -m "Update Nix inputs"
 ```
