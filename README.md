@@ -93,7 +93,7 @@ and commit the populated lock file. The complete variants are in the
 [project development shell examples](../example-dev-shell/README.md).
 
 The project directory also gets an isolated plugin cache. Language runtimes
-and LSP executables still come from uv, NVM/npm, or rustup after direnv has
+and LSP executables still come from uv, fnm/npm, or rustup after direnv has
 loaded that project's development shell.
 
 ## Routine update

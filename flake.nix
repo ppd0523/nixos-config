@@ -14,11 +14,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nvm is a sourced shell function, so pin its source independently.
-    nvm-src = {
-      url = "github:nvm-sh/nvm/v0.40.4";
-      flake = false;
-    };
+    # Tools that should track newer releases than the stable channel.
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = inputs@{

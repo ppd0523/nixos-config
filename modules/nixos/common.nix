@@ -9,7 +9,7 @@
     "flakes"
   ];
 
-  # uv, nvm, and rustup download upstream Linux binaries. nix-ld supplies the
+  # uv, fnm, and rustup download upstream Linux binaries. nix-ld supplies the
   # conventional dynamic-loader path those binaries expect on NixOS.
   programs.nix-ld.enable = true;
   programs.zsh.enable = true;

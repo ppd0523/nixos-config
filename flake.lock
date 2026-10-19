@@ -75,20 +75,19 @@
         "type": "github"
       }
     },
-    "nvm-src": {
-      "flake": false,
+    "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1769724723,
-        "narHash": "sha256-k2HCcdJYlWn1V3muNrUcXuT8WjvsnE/PO12Pr7R5Ffo=",
-        "owner": "nvm-sh",
-        "repo": "nvm",
-        "rev": "62387b8f92aa012d48202747fd75c40850e5e261",
+        "lastModified": 1792094642,
+        "narHash": "sha256-zp8ToDMnqZcu4o4IH9pdwXFXGp7yLm/M0dEnNWnyd7I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fe13242281a67641c0102cdb1087f0ebe586c7df",
         "type": "github"
       },
       "original": {
-        "owner": "nvm-sh",
-        "ref": "v0.40.4",
-        "repo": "nvm",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -97,7 +96,7 @@
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "nvm-src": "nvm-src"
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
   },

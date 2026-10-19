@@ -1,13 +1,17 @@
 {
   pkgs,
+  inputs,
   username,
   ...
 }:
+let
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     ./programs.nix
     ./lazyvim.nix
-    ./nvm.nix
+    ./fnm.nix
   ];
 
   home = {
@@ -20,8 +24,9 @@
     packages = with pkgs; [
       tree
       ripgrep
-      uv
-      rustup
+      unstable.uv
+      unstable.rustup
+      fnm
 
       # Common build/download support for project-managed runtimes.
       curl
