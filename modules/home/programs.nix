@@ -7,6 +7,9 @@
         init.defaultBranch = "main";
         core.editor = "nvim";
         pull.rebase = false;
+        # On WSL, reuse Windows credentials via Git for Windows' GCM.
+        # Skipped at runtime on hosts where the .exe does not exist.
+        credential.helper = "!f() { gcm='/mnt/c/Program Files/Git/ucrt64/bin/git-credential-manager.exe'; [ -x \"$gcm\" ] && exec \"$gcm\" \"$@\"; }; f";
       };
     };
 
